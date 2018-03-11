@@ -10,10 +10,10 @@ import java.util.Map;
  */
 public class Phonepad {
 
-    public List<String> letterCombinations(String digits) {
+    public static List<String> letterCombinations(String digits) {
 
-        List<String> results = new ArrayList<String>();
-        Map<Character, String> map = new HashMap<Character, String>();
+        List<String> results = new ArrayList<>();
+        Map<Character, String> map = new HashMap<>();
         map.put('2',"abc");
         map.put('3',"def");
         map.put('4',"ghi");
@@ -23,32 +23,28 @@ public class Phonepad {
         map.put('8',"stu");
         map.put('9',"wxyz");
 
+        results.add("");
         return createWordList(digits, 0, results, map);
     }
 
-    List<String> createWordList(String s, int index, List<String> results, Map<Character, String> map) {
-
-        if(index==s.length()) {
+    public static List<String> createWordList(String digits, int index, List<String> results, Map<Character, String> map) {
+        if(index==digits.length()) {
             return results;
         }
-
-        String thisDigit = map.get(s.charAt(index));
-        List<String> newList = new ArrayList<String>();
-
-        if(results.isEmpty()) {
-            for (Character c : thisDigit.toCharArray()) {
-                newList.add(c + "");
-            }
+        List<String> restResults = createWordList(digits, index+1, results, map);
+        String chars;
+        if(digits.charAt(index)=='0' || digits.charAt(index)=='1') {
+            chars = digits.charAt(index) + "";
         } else {
-            for(String str : results) {
-                for(Character ch : thisDigit.toCharArray()) {
-                    newList.add(str + ch);
-                }
+            chars = map.get(digits.charAt(index));
+        }
+        List<String> newResults = new ArrayList<>();
+        for(String res : restResults) {
+            for(int i=0; i<chars.length();i++) {
+                newResults.add(chars.charAt(i) + res);
             }
         }
-
-        return createWordList(s, index+1, newList, map);
-
+        return newResults;
     }
 
 }
