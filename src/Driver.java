@@ -1,4 +1,4 @@
-import leetcode.RecursivePrint;
+import leetcode.CommonCharacters;
 
 /**
  * Created by hkarachiwala on 3/8/17.
@@ -7,6 +7,6 @@ import leetcode.RecursivePrint;
 public class Driver {
 
     public static void main(String[] args) {
-        RecursivePrint.printRecursive(1);
+        System.out.println(CommonCharacters.commonCharacters("hamza", "sakina"));
     }
 }
